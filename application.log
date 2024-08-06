@@ -1,0 +1,26 @@
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.simple()
+  ),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'application.log' })
+  ]
+});
+
+function processarPagamento() {
+  logger.info('Processando pagamento...');
+  try {
+    // Código de processamento de pagamento
+    // Simulando um erro
+    throw new Error('Falha ao conectar ao banco de dados');
+  } catch (error) {
+    logger.error(`Erro ao processar pagamento: ${error.message}`);
+  }
+}
+
+processarPagamento();
